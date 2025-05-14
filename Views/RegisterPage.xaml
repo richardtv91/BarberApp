@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BarberApp.Views.RegisterPage"
+             Title="RegisterPage">
+    <VerticalStackLayout Padding="20" Spacing="15">
+        <Label 
+     Text="Registar Corte"
+     VerticalOptions="Center" 
+     HorizontalOptions="Center" />
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Text="Cliente" TextColor="Black" Grid.Row="0" Grid.Column="0"/>
+            <Entry x:Name="txtnombre" Placeholder="Ingrese el nombre del cliente" TextColor="Black" Grid.Row="0" Grid.Column="1"/>
+            <Label Text="Servicio" TextColor="Black" Grid.Row="1" Grid.Column="0"/>
+            <Picker x:Name="picker" 
+             Grid.Row="1" Grid.Column="1">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Corte CABELLO</x:String>
+                        <x:String>Cejas</x:String>
+                        <x:String>Barba</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+        </Grid>
+        <Button Text="Guardar servicio"></Button>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Text="ID" Grid.Row="0" Grid.Column="0" TextColor="Black"/>
+            <Label Text="Servicio" Grid.Row="0" Grid.Column="1"/>
+            <Label Text="Precio" Grid.Row="0" Grid.Column="2"/>
+            <Label Text="1" Grid.Row="1" Grid.Column="0"/>
+            <Label Text="Corte Hombre" Grid.Row="1" Grid.Column="1"/>
+            <Label Text="$2" Grid.Row="1" Grid.Column="2"/>
+        </Grid>
+
+        <Button Text="Cobrar" BackgroundColor="Green"></Button>
+    </VerticalStackLayout>
+</ContentPage>
