@@ -8,50 +8,37 @@ namespace BarberApp.Views;
 
 public partial class LoginPage : ContentPage
 {
-	public LoginPage()
+    private readonly HttpClient _httpClient;
+    public LoginPage()
 	{
 		InitializeComponent();
-	}
+        _httpClient = new HttpClient();
+    }
     private async void OnLoginClicked(object sender, EventArgs e)
     {
-        string usuario = UsernameEntry.Text;
-        string contrasena = PasswordEntry.Text;
-
-        var cliente = new HttpClient();
-        var url = "http://localhost:8080/api/auth/login"; // Ajusta si usas emulador Android o dispositivo físico
-
-        var datosLogin = new
+        var password = txtPassword.Text;
+        var email = txtUserM.Text;
+        var loginData= new
         {
-            usuario = usuario,
-            contrasena = contrasena
+            email_user = email,
+            password = password
         };
-
-        var contenido = new StringContent(JsonConvert.SerializeObject(datosLogin), Encoding.UTF8, "application/json");
-
-        try
+        var json=JsonConvert.SerializeObject(loginData);    
+        var content = new StringContent(json, Encoding.UTF8, "application/json");
+        var response = await _httpClient.PostAsync("https://credp-s.net.ec/apiba.php?table=persona&action=login", content);
+        if (response.IsSuccessStatusCode)
         {
-            var respuesta = await cliente.PostAsync(url, contenido);
-            if (respuesta.IsSuccessStatusCode)
-            {
-                var json = await respuesta.Content.ReadAsStringAsync();
-                var usuarioAutenticado = JsonConvert.DeserializeObject<UserModel>(json);
-
-                await DisplayAlert("Bienvenido", $"Hola {usuarioAutenticado.nombreUsuario} - Rol: {usuarioAutenticado.rol}", "OK");
-
-                App.UsuarioActual = usuarioAutenticado;
-                await Navigation.PushAsync(new PanelPrincipal());
-
-                await Navigation.PushAsync(new PanelPrincipal());
-            }
-            else
-            {
-                await DisplayAlert("Error", "Credenciales incorrectas", "OK");
-            }
+            var responseData = await response.Content.ReadAsStringAsync();
+            var persona = JsonConvert.DeserializeObject<Persona>(responseData);
+            // Aquí puedes guardar el token o realizar otras acciones necesarias
+            await DisplayAlert("Éxito", "Inicio de sesión exitoso", "OK");
+            // Navegar a la página principal o realizar otra acción
         }
-        catch (Exception ex)
+        else
         {
-            await DisplayAlert("Error", $"Fallo de conexión: {ex.Message}", "OK");
+            await DisplayAlert("Error", "Credenciales inválidas", "OK");
         }
+
     }
 
 }

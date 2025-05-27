@@ -12,10 +12,10 @@ namespace BarberApp
         protected override Window CreateWindow(IActivationState? activationState)
         {
             // 👇 Aquí se configura el NavigationPage con LoginPage como inicial
-            var navPage = new NavigationPage(new PanelPrincipal());
+            var navPage = new NavigationPage(new Views.LoginPage());
 
             return new Window(navPage);
         }
-        public static UserModel UsuarioActual { get; set; }
+        
     }
 }
