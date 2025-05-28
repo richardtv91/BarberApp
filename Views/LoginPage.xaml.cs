@@ -31,7 +31,8 @@ public partial class LoginPage : ContentPage
             var responseData = await response.Content.ReadAsStringAsync();
             var persona = JsonConvert.DeserializeObject<Persona>(responseData);
             // Aquí puedes guardar el token o realizar otras acciones necesarias
-            await Navigation.PushAsync(new Views.PanelPrincipal());
+           
+            await Navigation.PushAsync(new Views.PanelPrincipal(persona));
             await DisplayAlert("Éxito", "Inicio de sesión exitoso", "OK");
             // Navegar a la página principal o realizar otra acción
         }

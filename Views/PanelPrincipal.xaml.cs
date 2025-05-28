@@ -1,11 +1,14 @@
+using BarberApp.Models;
+
 namespace BarberApp.Views;
 
 public partial class PanelPrincipal : ContentPage
 {
-	public PanelPrincipal()
+	public PanelPrincipal(Persona datos)
 	{
 		InitializeComponent();
         CargarResumenDelDia();
+        lblUsuario.Text += $"({datos.Nombres})";
     }
     private async void CargarResumenDelDia()
     {

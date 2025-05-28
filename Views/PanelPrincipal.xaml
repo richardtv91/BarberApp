@@ -6,6 +6,12 @@
     <VerticalStackLayout>
         <StackLayout Padding="10" Spacing="20">
             <!-- Resumen de ingresos -->
+            <Label Text="Bienvenido al Panel Principal"
+               FontSize="24"
+               HorizontalOptions="Center" />
+            <Label x:Name="lblUsuario"
+                   FontSize="24"
+HorizontalOptions="Center"/>
             <Label Text="Ingresos Generados Hoy:"
                FontSize="18"
                HorizontalOptions="Center" />
